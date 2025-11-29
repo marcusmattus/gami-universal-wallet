@@ -1,0 +1,18 @@
+# Node/Expo/React Native
+node_modules/
+.expo/
+.expo-shared/
+android/
+ios/
+dist/
+build/
+
+# Next/React web projects within
+.next/
+.vercel/
+
+# Env/IDE/OS
+.env*
+.DS_Store
+.vscode/
+.idea/
