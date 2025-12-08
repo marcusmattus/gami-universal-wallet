@@ -1,11 +1,16 @@
 {
   "expo": {
-    "name": "Create mobile app",
+    "name": "Gami Universal Wallet",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/images/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0F0F13"
+    },
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
@@ -35,7 +40,8 @@
         {
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 200,
-          "resizeMode": "contain"
+          "resizeMode": "contain",
+          "backgroundColor": "#0F0F13"
         }
       ],
       "expo-audio",
