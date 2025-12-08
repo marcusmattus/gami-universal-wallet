@@ -111,26 +111,7 @@ export const NeoButton: React.FC<NeoButtonProps> = ({
   const currentVariant = variantStyles[variant];
 
   const buttonContent = (
-    <Animated.View
-      style={[
-        styles.button,
-        {
-          paddingVertical: currentSize.paddingVertical,
-          paddingHorizontal: currentSize.paddingHorizontal,
-          transform: [{ scale: scaleAnim }],
-        },
-        variant !== 'gradient' && {
-          backgroundColor: currentVariant.backgroundColor,
-        },
-        variant === 'outline' && {
-          borderWidth: currentVariant.borderWidth,
-          borderColor: currentVariant.borderColor,
-        },
-        fullWidth && styles.fullWidth,
-        disabled && styles.disabled,
-        style,
-      ]}
-    >
+    <>
       {loading ? (
         <ActivityIndicator
           color={variant === 'primary' ? neoUIColors.text.light : neoUIColors.primary}
@@ -157,7 +138,7 @@ export const NeoButton: React.FC<NeoButtonProps> = ({
           {icon && iconPosition === 'right' && icon}
         </>
       )}
-    </Animated.View>
+    </>
   );
 
   if (variant === 'gradient') {
@@ -182,7 +163,16 @@ export const NeoButton: React.FC<NeoButtonProps> = ({
             },
           ]}
         >
-          {buttonContent}
+          <Animated.View
+            style={[
+              styles.buttonInner,
+              {
+                transform: [{ scale: scaleAnim }],
+              },
+            ]}
+          >
+            {buttonContent}
+          </Animated.View>
         </LinearGradient>
       </TouchableOpacity>
     );
@@ -197,7 +187,28 @@ export const NeoButton: React.FC<NeoButtonProps> = ({
       activeOpacity={0.8}
       style={[fullWidth && styles.fullWidth]}
     >
-      {buttonContent}
+      <Animated.View
+        style={[
+          styles.button,
+          {
+            paddingVertical: currentSize.paddingVertical,
+            paddingHorizontal: currentSize.paddingHorizontal,
+            transform: [{ scale: scaleAnim }],
+          },
+          variant !== 'gradient' && {
+            backgroundColor: currentVariant.backgroundColor,
+          },
+          variant === 'outline' && {
+            borderWidth: currentVariant.borderWidth,
+            borderColor: currentVariant.borderColor,
+          },
+          fullWidth && styles.fullWidth,
+          disabled && styles.disabled,
+          style,
+        ]}
+      >
+        {buttonContent}
+      </Animated.View>
     </TouchableOpacity>
   );
 };
@@ -209,6 +220,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     ...shadows.md,
+  },
+  buttonInner: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   gradient: {
     borderRadius: borderRadius.lg,

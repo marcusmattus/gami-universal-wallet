@@ -11,6 +11,7 @@ import {
   Dimensions,
   TouchableOpacity,
   Text,
+  ViewToken,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
@@ -48,11 +49,13 @@ export default function OnboardingScreen() {
     router.replace('/auth/signup');
   };
 
-  const onViewableItemsChanged = useRef(({ viewableItems }: any) => {
-    if (viewableItems.length > 0) {
-      setCurrentIndex(viewableItems[0].index || 0);
+  const onViewableItemsChanged = useRef(
+    ({ viewableItems }: { viewableItems: ViewToken[] }) => {
+      if (viewableItems.length > 0 && viewableItems[0].index !== null) {
+        setCurrentIndex(viewableItems[0].index);
+      }
     }
-  }).current;
+  ).current;
 
   const viewabilityConfig = useRef({
     itemVisiblePercentThreshold: 50,

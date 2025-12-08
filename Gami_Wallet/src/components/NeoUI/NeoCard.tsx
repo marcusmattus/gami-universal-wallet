@@ -65,7 +65,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(26, 26, 36, 0.7)',
     borderWidth: 1,
     borderColor: 'rgba(255, 255, 255, 0.1)',
-    backdropFilter: 'blur(10px)',
+    // Note: backdropFilter is not supported in React Native
+    // Glass effect is achieved through transparent background
   },
   gradientCard: {
     borderWidth: 0,

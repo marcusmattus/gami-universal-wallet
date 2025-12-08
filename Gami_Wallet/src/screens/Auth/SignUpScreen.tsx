@@ -18,6 +18,7 @@ import { StatusBar } from 'expo-status-bar';
 import { Eye, EyeOff, Mail, User } from 'lucide-react-native';
 import { neoUIColors, typography, spacing, borderRadius } from '@/theme';
 import { NeoButton, NeoInput } from '@/components/NeoUI';
+import { isValidEmail, validatePassword, validateFullName } from '@/utils/validation';
 
 export default function SignUpScreen() {
   const router = useRouter();
@@ -33,20 +34,20 @@ export default function SignUpScreen() {
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
     
-    if (!formData.fullName.trim()) {
-      newErrors.fullName = 'Full name is required';
+    const nameError = validateFullName(formData.fullName);
+    if (nameError) {
+      newErrors.fullName = nameError;
     }
     
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required';
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Email is invalid';
+    } else if (!isValidEmail(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
     }
     
-    if (!formData.password) {
-      newErrors.password = 'Password is required';
-    } else if (formData.password.length < 8) {
-      newErrors.password = 'Password must be at least 8 characters';
+    const passwordError = validatePassword(formData.password);
+    if (passwordError) {
+      newErrors.password = passwordError;
     }
     
     if (!agreedToTerms) {

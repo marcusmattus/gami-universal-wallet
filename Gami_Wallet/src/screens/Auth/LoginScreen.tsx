@@ -18,6 +18,7 @@ import { StatusBar } from 'expo-status-bar';
 import { Eye, EyeOff, Mail } from 'lucide-react-native';
 import { neoUIColors, typography, spacing } from '@/theme';
 import { NeoButton, NeoInput } from '@/components/NeoUI';
+import { isValidEmail } from '@/utils/validation';
 
 export default function LoginScreen() {
   const router = useRouter();
@@ -33,8 +34,8 @@ export default function LoginScreen() {
     
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required';
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Email is invalid';
+    } else if (!isValidEmail(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
     }
     
     if (!formData.password) {
